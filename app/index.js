@@ -61,29 +61,27 @@ ExpressWebappGenerator.prototype.app = function app() {
     this.mkdir('public/js');
     
     // basic package items
-    this.copy('_package.json', 'package.json');
-    this.copy('_bower.json', 'bower.json');
+    this.template('_package.json', 'package.json');
+    this.template('_bower.json', 'bower.json');
     
     // Basic app items
-    this.copy('_app.js', 'app.js');
+    this.template('_app.js', 'app.js');
     
     // Config
-    this.copy('config/_config.js', 'config/config.js');
+    this.template('config/_config.js', 'config/config.js');
     
     // Basic Route
-    this.copy('routes/_index.js', 'routes/index.js');
+    this.template('routes/_index.js', 'routes/index.js');
     
     // Views
-    this.copy('views/_layout.jade', 'views/layout.jade');
-    this.copy('views/_index.jade', 'views/index.jade');
+    this.template('views/_layout.jade', 'views/layout.jade');
+    this.template('views/_index.jade', 'views/index.jade');
     
     // Bower files
     if (this.bootstrap) {
         this.bowerInstall(['bootstrap'], {save: true});
-        this.copy('public/_styles.bootstrap.less', 'public/less/styles.less');
-    } else {
-        this.copy('public/_styles.empty.less', 'public/less/styles.less');
     }
+    this.template('public/_styles.less', 'public/less/styles.less');
 };
 
 ExpressWebappGenerator.prototype.projectfiles = function projectfiles() {
