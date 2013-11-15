@@ -39,7 +39,7 @@ if ('development' === app.get('env')) {
 var routesPath = __dirname + '/routes';
 fs.readdirSync(routesPath).forEach(function (file) {
     if (file.indexOf('.js') >= 0) {
-        require(routesPath + '/' + file)(app);
+        require(routesPath + '/' + file)(app, MySql);
     }
 });
 

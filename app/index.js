@@ -63,6 +63,7 @@ ExpressWebappGenerator.prototype.app = function app() {
     // basic package items
     this.template('_package.json', 'package.json');
     this.template('_bower.json', 'bower.json');
+    this.template('_Gruntfile.js', 'Gruntfile.js');
     
     // Basic app items
     this.template('_app.js', 'app.js');

@@ -2,10 +2,11 @@
 
 A generator for [Yeoman](http://yeoman.io).
 
+This project generates an Express project in MVC style for use with Bookshelf.js and mysql
 
 ## Usage
 
-Install `generator-angular`:
+Install `generator-express-webapp`:
 ```
 npm install -g generator-express-webapp
 ```
