@@ -6,6 +6,10 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        jshint: {
+            options: { jshintrc: true },
+            all: ['Gruntfile.js', 'app/**/*.js', 'test/**/*.js']
+        },
         release: {
             options: {
                 commitMessage: '<%= version %>',
@@ -20,6 +24,8 @@ module.exports = function (grunt) {
             }
         }
     });
+    
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.registerTask('bump', 'bump manifest version', function (type) {
         var options = this.options({
@@ -41,5 +47,5 @@ module.exports = function (grunt) {
         grunt.log.ok('Version bumped to ' + config.newVersion);
     });
 
-    grunt.registerTask('default', ['bump', 'release']);
+    grunt.registerTask('default', ['bump', 'release', 'jshint']);
 };

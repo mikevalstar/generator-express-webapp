@@ -23,13 +23,16 @@ ExpressWebappGenerator.prototype.askFor = function askFor() {
     console.log(this.yeoman);
     
     var prompts = [{
-        type: 'list',
-        name: 'db',
-        message: 'Select a database to install:',
-        choices: [
-            'MongoDB',
-            'MySQL'
-        ]
+        name: 'appname',
+        message: 'What do you want to call your app?'
+    }, {
+        name: 'dbUser',
+        message: 'What is the database user?',
+        default: 'root'
+    }, {
+        name: 'dbPassword',
+        message: 'What is the database password?',
+        default: 'password'
     }, {
         type: 'confirm',
         name: 'bootstrap',
@@ -38,8 +41,11 @@ ExpressWebappGenerator.prototype.askFor = function askFor() {
     }];
     
     this.prompt(prompts, function (props) {
-        this.dbOpt      = props.db;
-        this.bootstrap  = props.bootstrap;
+        this.appname        = props.appname;
+        this.appname        = this._.camelize(this._.slugify(this._.humanize(this.appname)));
+        this.dbUser         = props.dbUser;
+        this.dbPassword     = props.dbPassword;
+        this.bootstrap      = props.bootstrap;
         
         cb();
     }.bind(this));
@@ -47,10 +53,26 @@ ExpressWebappGenerator.prototype.askFor = function askFor() {
 
 ExpressWebappGenerator.prototype.app = function app() {
     this.mkdir('app');
-    this.mkdir('app/templates');
+    this.mkdir('app/config');
+    this.mkdir('app/views');
+    this.mkdir('app/routes');
     
+    // basic package items
     this.copy('_package.json', 'package.json');
     this.copy('_bower.json', 'bower.json');
+    
+    // Basic app items
+    this.copy('_app.js', 'app.js');
+    
+    // Config
+    this.copy('config/_config.js', 'config/config.js');
+    
+    // Basic Route
+    this.copy('routes/_index.js', 'routes/index.js');
+    
+    // Views
+    this.copy('views/_layout.jade', 'views/layout.jade');
+    this.copy('views/_index.jade', 'views/index.jade');
 };
 
 ExpressWebappGenerator.prototype.projectfiles = function projectfiles() {
