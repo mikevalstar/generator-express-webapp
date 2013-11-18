@@ -25,6 +25,8 @@ yo express-webapp
 
 Available generators:
 * express-webapp (aka express-webapp:app)
+* express-webapp:model
+* express-webapp:route
 
 ## License
 
