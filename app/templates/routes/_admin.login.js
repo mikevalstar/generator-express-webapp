@@ -14,4 +14,9 @@ module.exports = function (app) {
                                                    failureRedirect: '/admin/login',
                                                    failureFlash: false })
     );
+    
+    app.get('/admin/logout', function(req, res){
+        req.logout();
+        res.redirect('/');
+    });
 };
