@@ -9,7 +9,7 @@
         "express": "~3.4.4",
         "jade": "*",
         "less-middleware": "*",
-        "bookshelf": "~0.5.7",
+        "sequelize": "~2.0.0",
         "mysql": "*"
     },
     "devDependencies": {

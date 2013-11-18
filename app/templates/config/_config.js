@@ -11,6 +11,7 @@ var config = {
         port: 3000,
         db: {
             host     : '127.0.0.1',
+            port     : '8889',
             user     : '<%= _.slugify(dbUser) %>',
             password : '<%= _.slugify(dbPassword) %>',
             database : '<%= _.slugify(appname) %>-development',
@@ -26,6 +27,7 @@ var config = {
         port: 3000,
         db: {
             host     : '127.0.0.1',
+            port     : '3306',
             user     : '<%= _.slugify(dbUser) %>',
             password : '<%= _.slugify(dbPassword) %>',
             database : '<%= _.slugify(appname) %>-test',
@@ -41,6 +43,7 @@ var config = {
         port: 3000,
         db: {
             host     : '127.0.0.1',
+            port     : '3306',
             user     : '<%= _.slugify(dbUser) %>',
             password : '<%= _.slugify(dbPassword) %>',
             database : '<%= _.slugify(appname) %>-production',

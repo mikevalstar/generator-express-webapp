@@ -7,12 +7,16 @@ var express = require('express'),
     http = require('http'),
     path = require('path'),
     fs = require('fs'),
-    Bookshelf  = require('bookshelf'),
+    Sequelize = require('sequelize'),
     config = require('./config/config');
 
-var MySql = Bookshelf.initialize({
-    client: 'mysql',
-    connection: config.db
+var sql = new Sequelize(config.db.database, config.db.user, config.db.password, {
+    host: config.db.host,
+    port: config.db.port,
+    dialect: 'mysql',
+    define: {
+        charset: config.db.charset
+    }
 });
 
 var app = express();
@@ -35,11 +39,14 @@ if ('development' === app.get('env')) {
     app.use(express.errorHandler());
 }
 
+// Load the Models
+app.set("models", require('./models')(sql));
+
 // Load the Routes
 var routesPath = __dirname + '/routes';
 fs.readdirSync(routesPath).forEach(function (file) {
     if (file.indexOf('.js') >= 0) {
-        require(routesPath + '/' + file)(app, MySql);
+        require(routesPath + '/' + file)(app, sql);
     }
 });
 

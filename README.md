@@ -2,7 +2,7 @@
 
 A generator for [Yeoman](http://yeoman.io).
 
-This project generates an Express project in MVC style for use with Bookshelf.js and mysql
+This project generates an Express project in MVC style for use with Sequelize and mysql
 
 ## Usage
 

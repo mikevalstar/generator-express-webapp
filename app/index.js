@@ -55,6 +55,7 @@ ExpressWebappGenerator.prototype.app = function app() {
     this.mkdir('config');
     this.mkdir('views');
     this.mkdir('routes');
+    this.mkdir('models');
     this.mkdir('public');
     this.mkdir('public/less');
     this.mkdir('public/img');
@@ -74,6 +75,9 @@ ExpressWebappGenerator.prototype.app = function app() {
     // Basic Route
     this.template('routes/_index.js', 'routes/index.js');
     
+    // Model Loader
+    this.template('models/_index.js', 'models/index.js');
+    
     // Views
     this.template('views/_layout.jade', 'views/layout.jade');
     this.template('views/_index.jade', 'views/index.jade');
@@ -89,4 +93,5 @@ ExpressWebappGenerator.prototype.projectfiles = function projectfiles() {
     this.copy('editorconfig', '.editorconfig');
     this.copy('jshintrc', '.jshintrc');
     this.copy('bowerrc', '.bowerrc');
+    this.copy('gitignore', '.gitignore');
 };

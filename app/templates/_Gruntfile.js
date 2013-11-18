@@ -33,6 +33,34 @@ module.exports = function (grunt) {
         grunt.file.write(config.file, JSON.stringify(config.pkg, null, '  ') + '\n');
         grunt.log.ok('Version bumped to ' + config.newVersion);
     });
+    
+    grunt.registerTask('dbInit', 'Sync and load the database objects', function(){
+        grunt.log.writeln('Syncing database');
+        
+        var done = this.async();
+        
+        var Sequelize = require('sequelize'),
+            config = require('./config/config');
+        
+        var sql = new Sequelize(config.db.database, config.db.user, config.db.password, {
+            host: config.db.host,
+            port: config.db.port,
+            dialect: 'mysql',
+            define: {
+                charset: config.db.charset
+            }
+        });
+        
+        require('./models')(sql);
+        
+        sql.sync().success(function() {
+            grunt.log.ok("Database Synced");
+            done(true);
+        }).error(function(error) {
+            grunt.log.writeln(error);
+            done(false);
+        });
+    });
 
-    grunt.registerTask('default', ['bump', 'jshint']);
+    grunt.registerTask('default', ['jshint']);
 };
