@@ -34,7 +34,7 @@ module.exports = function (grunt) {
         grunt.log.ok('Version bumped to ' + config.newVersion);
     });
     
-    grunt.registerTask('dbInit', 'Sync and load the database objects', function(){
+    grunt.registerTask('dbInit', 'Sync and load the database objects', function () {
         grunt.log.writeln('Syncing database');
         
         var done = this.async();
@@ -53,10 +53,10 @@ module.exports = function (grunt) {
         
         require('./models')(sql);
         
-        sql.sync().success(function() {
+        sql.sync().success(function () {
             grunt.log.ok("Database Synced");
             done(true);
-        }).error(function(error) {
+        }).error(function (error) {
             grunt.log.writeln(error);
             done(false);
         });

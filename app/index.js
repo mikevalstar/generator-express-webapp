@@ -38,6 +38,11 @@ ExpressWebappGenerator.prototype.askFor = function askFor() {
         name: 'bootstrap',
         message: 'Would you like to enable Twitter Bootstrap?',
         default: true
+    }, {
+        type: 'confirm',
+        name: 'passportlogin',
+        message: 'Would you like to enable Passport for an admin login system?',
+        default: true
     }];
     
     this.prompt(prompts, function (props) {
@@ -46,6 +51,7 @@ ExpressWebappGenerator.prototype.askFor = function askFor() {
         this.dbUser         = props.dbUser;
         this.dbPassword     = props.dbPassword;
         this.bootstrap      = props.bootstrap;
+        this.passportlogin  = props.passportlogin;
         
         cb();
     }.bind(this));
@@ -81,6 +87,22 @@ ExpressWebappGenerator.prototype.app = function app() {
     // Views
     this.template('views/_layout.jade', 'views/layout.jade');
     this.template('views/_index.jade', 'views/index.jade');
+    
+    // Passport Login
+    if (this.passportlogin) {
+        this.mkdir('views/admin');
+        
+        this.template('views/admin/_layout.jade', 'views/admin/layout.jade');
+        this.template('views/admin/_index.jade', 'views/admin/index.jade');
+        this.template('views/admin/_login.jade', 'views/admin/login.jade');
+        
+        this.template('routes/_admin.index.js', 'routes/admin.index.js');
+        this.template('routes/_admin.login.js', 'routes/admin.login.js');
+        
+        this.template('models/_User.js', 'models/User.js');
+        
+        this.npmInstall(['passport', 'passport-local'], {save: true});
+    }
     
     // Bower files
     if (this.bootstrap) {
