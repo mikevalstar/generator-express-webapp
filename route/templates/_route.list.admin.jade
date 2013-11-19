@@ -1,4 +1,19 @@
 extends layout
 
 block content
-    h1 <%= routename %>
+    h1 <%= routename %> List
+        
+    table.table
+        thead
+            tr
+                each v, k in model.rawAttributes
+                    th= k
+        tbody
+            each row in results.rows
+                tr
+                    each v, k in model.rawAttributes
+                        td= row[k]
+    
+    div(style="text-align: center;")
+        | Row count: 
+        span= results.count

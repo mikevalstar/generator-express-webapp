@@ -11,8 +11,11 @@ module.exports = function (app) {
     <% } else { %>
     app.get('/<%= routename %>', function (req, res) {
         
-        res.render('list.<%= routename %>.jade', {
-            title: '<%= routename %>'
+        app.get('models').<%= modelname %>.findAndCountAll().success(function(result){
+            res.render('list.<%= routename %>.jade', {
+                title: '<%= routename %>',
+                results: results
+            });
         });
         
     });
