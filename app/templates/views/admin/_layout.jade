@@ -5,7 +5,16 @@ html(lang='en')
         meta(name='viewport', content='width=device-width')
         title= title
         block css
-            link(rel='stylesheet', href='/less/styles.css')
+            link(rel='stylesheet', href='/less/admin.css')
         block js
     body
-        block content
+        nav.navbar.navbar-default(role="navigation")
+            .container
+                a.navbar-brand(href="/") <%= appname %>
+                .collapse.navbar-collapse
+                    ul.nav.navbar-nav
+                        if adminNav
+                            each v in adminNav
+                                li: a(href=v.route)= v.routeName
+        .container
+            block content

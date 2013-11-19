@@ -11,7 +11,7 @@ module.exports = function (app) {
     <% } else { %>
     app.get('/<%= routename %>', function (req, res) {
         
-        res.render('<%= routename %>', {
+        res.render('list.<%= routename %>.jade', {
             title: '<%= routename %>'
         });
         

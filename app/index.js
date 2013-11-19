@@ -101,6 +101,8 @@ ExpressWebappGenerator.prototype.app = function app() {
         
         this.template('models/_User.js', 'models/User.js');
         
+        this.template('public/_admin.less', 'public/less/admin.less');
+        
         this.npmInstall(['passport', 'passport-local'], {save: true});
     }
     

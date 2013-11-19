@@ -79,6 +79,7 @@ if ('development' === app.get('env')) {
 }
 
 // Load the Routes
+<% if(passportlogin){ %>app.set('adminRoutes', [])<% } %>
 var routesPath = __dirname + '/routes';
 fs.readdirSync(routesPath).forEach(function (file) {
     if (file.indexOf('.js') >= 0) {

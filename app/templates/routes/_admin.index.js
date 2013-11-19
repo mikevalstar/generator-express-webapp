@@ -3,12 +3,13 @@ module.exports = function (app) {
     app.get('/admin', function (req, res) {
         
         if(!req.isAuthenticated()){
-            res.redirect("/login");
+            res.redirect("/admin/login");
             return;
         }
         
         res.render('admin/index', {
-            title: 'Index'
+            title: 'Index',
+            adminNav: app.get('adminRoutes')
         });
         
     });
