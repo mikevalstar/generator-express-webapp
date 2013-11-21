@@ -1,6 +1,9 @@
 extends layout
 
 block content
+    .utilityblock.pull-right
+        a.btn.btn-primary(href="/admin/<%= routename %>/new") New <%= routename %>
+
     h1 <%= routename %> List
         
     table.table
@@ -12,7 +15,11 @@ block content
             each row in results.rows
                 tr
                     each v, k in model.rawAttributes
-                        td= row[k]
+                        if(k == 'id')
+                            td
+                                a(href="/admin/<%= routename %>/"+row[k])= row[k]
+                        else
+                            td= row[k]
     
     div(style="text-align: center;")
         | Row count: 

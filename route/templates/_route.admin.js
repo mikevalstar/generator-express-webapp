@@ -40,4 +40,31 @@ module.exports = function (app) {
         });
         
     });
+        
+    app.post('/admin/<%= routename %>/:id', function (req, res) {
+        
+        if (!req.isAuthenticated()) {
+            res.redirect("/admin/login");
+            return;
+        }
+        
+        if(req.params.id == 'new'){
+            
+            app.get('models').<%= modelname %>.create(req.body).success(function(item){
+                res.redirect('/admin/<%= routename %>/' + item.id);
+                return;
+            });
+            
+        }else{
+        
+            app.get('models').<%= modelname %>.find(req.params.id).success(function (item) {
+                item.updateAttributes(req.body).success(function(){
+                    res.redirect('/admin/<%= routename %>/' + item.id);
+                    return;
+                });
+            });
+            
+        }
+        
+    });
 };
